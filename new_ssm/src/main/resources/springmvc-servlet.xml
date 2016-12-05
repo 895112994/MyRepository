@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+	
+	<!-- 配置springmvc控制器中的注解模式 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~文件上传配置~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="1000000"></property>
+	<property name="defaultEncoding" value="utf-8"></property>
+	</bean>
+	<mvc:resources location="/resource/" mapping="/resource/**"></mvc:resources>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	<context:component-scan base-package="org.springmvc.controller"></context:component-scan>
+	
+	<!-- 配置springmvc视图解析器  -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 视图文件的前半部分,服务器上jsp存放目录  -->
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<!-- 视图文件后半部分，服务器jsp文件的扩展名  -->
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<!-- 自定义bean -->
+	<bean name="/beanName" class="org.springmvc.controller.HanderHello"></bean>
+</beans>
