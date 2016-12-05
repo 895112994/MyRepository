@@ -1,6 +1,5 @@
 package org.thread;
 
-
 public class SingleTon {
 	private SingleTon(){}
 	
